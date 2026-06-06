@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "https://tdc-matchmaker-backend-vjb7.onrender.com/api",
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
 });
