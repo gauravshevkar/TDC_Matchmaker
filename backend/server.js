@@ -46,6 +46,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // ── Health Check ─────────────────────────────────────────────
+
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'TDC Matchmaker Backend Running',
+    health: '/api/health'
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
