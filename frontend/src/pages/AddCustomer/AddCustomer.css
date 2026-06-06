@@ -1,0 +1,180 @@
+/* pages/AddCustomer/AddCustomer.css */
+
+.add-customer-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.add-customer-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+/* ── Breadcrumb ──────────────────────────────────── */
+.add-customer-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  font-size: 0.82rem;
+}
+
+/* ── Page Header ─────────────────────────────────── */
+.add-customer-header {
+  margin-bottom: 28px;
+}
+
+.add-customer-header h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+  font-family: var(--font-display, 'DM Sans', sans-serif);
+}
+
+.add-customer-header p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ── Form Sections ───────────────────────────────── */
+.form-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-section-title span {
+  font-size: 1.2rem;
+}
+
+.form-section-title h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ── Grid ────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid.cols-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-grid.cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+/* ── Form Group ──────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: var(--rose-gold, #C9956A);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  appearance: auto;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--rose-gold, #C9956A);
+  box-shadow: 0 0 0 3px rgba(201, 149, 106, 0.12);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ── Footer Actions ──────────────────────────────── */
+.add-customer-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Submitting overlay ──────────────────────────── */
+.form-submitting {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ── Success Animation ───────────────────────────── */
+@keyframes pop-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .col-span-2 {
+    grid-column: span 1;
+  }
+
+  .add-customer-footer {
+    flex-direction: column-reverse;
+  }
+
+  .add-customer-footer .btn {
+    width: 100%;
+  }
+}
