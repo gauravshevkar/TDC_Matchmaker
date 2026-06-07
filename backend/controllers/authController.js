@@ -89,17 +89,17 @@ const getMe = async (req, res, next) => {
 //     }
 
     // Check karo existing users hain ya nahi
-    const existing = await User.findOne({ username: 'matchmaker1' });
-    if (existing) {
-      return res.status(200).json({
-        success: true,
-        message: 'Users already seeded',
-        credentials: [
-          { username: 'matchmaker1', password: 'TDC@2024' },
-          { username: 'matchmaker2', password: 'TDC@2024' },
-        ],
-      });
-    }
+    // const existing = await User.findOne({ username: 'matchmaker1' });
+    // if (existing) {
+    //   return res.status(200).json({
+    //     success: true,
+    //     message: 'Users already seeded',
+    //     credentials: [
+    //       { username: 'matchmaker1', password: 'TDC@2024' },
+    //       { username: 'matchmaker2', password: 'TDC@2024' },
+    //     ],
+    //   });
+    // }
 
     // Sirf matchmaker accounts — no admin role
     const users = [
