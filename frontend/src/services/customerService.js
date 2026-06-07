@@ -32,8 +32,5 @@ export const customerService = {
     return data;
   },
 
-  // seedProfiles: async () => {
-  //   const { data } = await api.post('/customers/seed');
-  //   return data;
-  // },
+ 
 };
