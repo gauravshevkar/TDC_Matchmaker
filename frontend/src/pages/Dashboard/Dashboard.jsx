@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [total, setTotal]         = useState(0);
   const [stats, setStats]         = useState({});
   const [loading, setLoading]     = useState(true);
-  const [seeding, setSeeding]     = useState(false);
+  // const [seeding, setSeeding]     = useState(false);
   const [search, setSearch]       = useState('');
   const [status, setStatus]       = useState('All');
   const [gender, setGender]       = useState('All');
@@ -66,23 +66,23 @@ export default function Dashboard() {
   // Reset page when filters change
   useEffect(() => { setPage(1); }, [search, status, gender]);
 
-  const handleSeed = async () => {
-    setSeeding(true);
-    try {
-      const data = await customerService.seedProfiles();
-      toast.success(`${data.count} profiles loaded into database!`);
-      fetchCustomers();
-    } catch (err) {
-      const msg = err.response?.data?.message || 'Seeding failed';
-      if (msg.includes('already')) {
-        toast('Profiles already seeded!', { icon: 'ℹ️' });
-      } else {
-        toast.error(msg);
-      }
-    } finally {
-      setSeeding(false);
-    }
-  };
+  // const handleSeed = async () => {
+  //   setSeeding(true);
+  //   try {
+  //     const data = await customerService.seedProfiles();
+  //     toast.success(`${data.count} profiles loaded into database!`);
+  //     fetchCustomers();
+  //   } catch (err) {
+  //     const msg = err.response?.data?.message || 'Seeding failed';
+  //     if (msg.includes('already')) {
+  //       toast('Profiles already seeded!', { icon: 'ℹ️' });
+  //     } else {
+  //       toast.error(msg);
+  //     }
+  //   } finally {
+  //     setSeeding(false);
+  //   }
+  // };
 
   return (
     <div className="dashboard-page">
@@ -96,13 +96,13 @@ export default function Dashboard() {
             <p className="text-secondary text-sm">Manage your clients and find their perfect match</p>
           </div>
           <div className="dashboard-header-actions">
-            <button className="btn btn-secondary" onClick={handleSeed} disabled={seeding}>
+            {/* <button className="btn btn-secondary" onClick={handleSeed} disabled={seeding}>
               {seeding ? <><span className="spinner" /> Loading...</> : (
                 <><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
                 </svg> Load Sample Data</>
               )}
-            </button>
+            </button> */}
             <button className="btn btn-primary" onClick={() => navigate('/customers/new')}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -193,7 +193,7 @@ export default function Dashboard() {
             ))}
           </div>
         ) : customers.length === 0 ? (
-          <EmptyState search={search} onSeed={handleSeed} seeding={seeding} />
+          
         ) : (
           <div className="customers-list fade-in">
             {customers.map((c, i) => (
@@ -249,7 +249,8 @@ function StatCard({ label, value, icon, color }) {
   );
 }
 
-function EmptyState({ search, onSeed, seeding }) {
+<EmptyState search={search} />
+function EmptyState({ search }) {
   return (
     <div className="empty-state card">
       <div className="empty-icon">💑</div>
@@ -257,14 +258,8 @@ function EmptyState({ search, onSeed, seeding }) {
       <p className="text-secondary text-sm">
         {search
           ? `No clients match "${search}". Try a different search.`
-          : 'Load sample profiles to get started with the matchmaking dashboard.'}
+          : 'Add your first client using the "Add Customer" button above.'}
       </p>
-      {!search && (
-        <button className="btn btn-primary" onClick={onSeed} disabled={seeding}>
-          {seeding ? <span className="spinner" /> : '⚡'}
-          Load 100+ Sample Profiles
-        </button>
-      )}
     </div>
   );
 }
