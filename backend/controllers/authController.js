@@ -82,11 +82,11 @@ const getMe = async (req, res, next) => {
  * @route   POST /api/auth/seed
  * @access  Public (only in development)
  */
-const seedUsers = async (req, res, next) => {
-  try {
-    if (process.env.NODE_ENV !== 'development') {
-      return res.status(403).json({ success: false, message: 'Not allowed in production' });
-    }
+// const seedUsers = async (req, res, next) => {
+//   try {
+//     if (process.env.NODE_ENV !== 'development') {
+//       return res.status(403).json({ success: false, message: 'Not allowed in production' });
+//     }
 
     // Check karo existing users hain ya nahi
     const existing = await User.findOne({ username: 'matchmaker1' });
@@ -135,4 +135,4 @@ const seedUsers = async (req, res, next) => {
   }
 };
 
-module.exports = { login, getMe, seedUsers };
+module.exports = { login, getMe };
