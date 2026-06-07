@@ -30,9 +30,5 @@ export const authService = {
 
   isAuthenticated: () => !!localStorage.getItem('tdc_token'),
 
-  // Seed default users (development)
-  // seedUsers: async () => {
-  //   const { data } = await api.post('/auth/seed');
-  //   return data;
-  // },
+
 };
