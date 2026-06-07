@@ -1,7 +1,7 @@
 // routes/authRoutes.js
 const express = require('express');
 const { body } = require('express-validator');
-const { login, getMe, seedUsers } = require('../controllers/authController');
+const { login, getMe } = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -12,6 +12,6 @@ router.post('/login', [
 ], login);
 
 router.get('/me', protect, getMe);
-router.post('/seed', seedUsers); // Only in development
+// router.post('/seed', seedUsers); // Only in development
 
 module.exports = router;
