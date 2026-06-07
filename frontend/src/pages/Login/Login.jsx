@@ -10,7 +10,6 @@ export default function Login() {
   const [form, setForm]       = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
-  // const [seedLoading, setSeedLoading] = useState(false);
 
   const { login, isAuthenticated } = useAuth();
   const navigate  = useNavigate();
@@ -44,24 +43,7 @@ export default function Login() {
     }
   };
 
-  // const handleSeed = async () => {
-  //   setSeedLoading(true);
-  //   try {
-  //     const data = await authService.seedUsers();
-  //     toast.success('Demo accounts created! Use: matchmaker1 / TDC@2024');
-  //     setForm({ username: 'matchmaker1', password: 'TDC@2024' });
-  //   } catch (err) {
-  //     const msg = err.response?.data?.message || 'Seed failed';
-  //     if (msg.includes('already')) {
-  //       toast('Accounts already exist. Use: matchmaker1 / TDC@2024', { icon: 'ℹ️' });
-  //       setForm({ username: 'matchmaker1', password: 'TDC@2024' });
-  //     } else {
-  //       toast.error(msg);
-  //     }
-  //   } finally {
-  //     setSeedLoading(false);
-  //   }
-  // };
+
 
   return (
     <div className="login-page">
@@ -153,18 +135,6 @@ export default function Login() {
             <span>or</span>
           </div>
 
-          {/* <div className="login-demo">
-            <p className="text-sm text-muted" style={{ textAlign: 'center', marginBottom: 12 }}>
-              First time? Create demo accounts to get started
-            </p>
-            <button
-              className="btn btn-secondary w-full"
-              onClick={handleSeed}
-              disabled={seedLoading}
-            >
-              {seedLoading ? <><span className="spinner" />&nbsp;Creating...</> : '⚡ Create Demo Accounts'}
-            </button>
-          </div> */}
 
           <div className="login-creds">
             <div className="cred-item">
