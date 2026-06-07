@@ -54,44 +54,72 @@
 
 ```
 TDC_assignment/
-├── frontend/
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Login/
-│   │   │   ├── Dashboard/
-│   │   │   ├── CustomerDetail/
-│   │   │   └── AddCustomer/
-│   │   ├── components/
-│   │   │   ├── Navbar/
-│   │   │   └── CustomerCard/
-│   │   ├── services/
-│   │   │   ├── api.js
-│   │   │   ├── authService.js
-│   │   │   └── customerService.js
-│   │   └── context/
-│   │       └── AuthContext.jsx
-│   └── .env.example
+│
+├── .gitignore
 │
 ├── backend/
+│   ├── config/
 │   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── customerController.js
-│   │   └── matchController.js
-│   ├── services/
-│   │   ├── matchingService.js     ← Rule-based algorithm
-│   │   └── geminiService.js       ← AI scoring & email generation
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Customer.js
-│   │   └── Match.js
-│   ├── routes/
-│   ├── middleware/
 │   ├── data/
-│   │   ├── customers.json         ← 100+ dummy profiles
-│   │   └── users.json             ← Matchmaker accounts
-│   ├── scripts/
-│   │   └── insertData.js          ← DB seed script
-│   └── .env.example
+│   ├── middleware/
+│   ├── models/
+│   ├── node_modules/
+│   ├── routes/
+│   ├── services/
+│   ├── .env
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+│
+└── frontend/
+    ├── node_modules/
+    ├── public/
+    │
+    ├── src/
+    │   ├── assets/
+    │   │
+    │   ├── components/
+    │   │   ├── CustomerCard/
+    │   │   ├── MatchCard/
+    │   │   ├── Navbar/
+    │   │   ├── NotesSection/
+    │   │   └── StatusBadge/
+    │   │
+    │   ├── context/
+    │   │   └── AuthContext.jsx
+    │   │
+    │   ├── pages/
+    │   │   ├── AddCustomer/
+    │   │   ├── CustomerDetail/
+    │   │   ├── Dashboard/
+    │   │   ├── Login/
+    │   │   ├── Matches/
+    │   │   └── NotFound/
+    │   │
+    │   ├── routes/
+    │   │   └── ProtectedRoute.jsx
+    │   │
+    │   ├── services/
+    │   │   ├── api.js
+    │   │   ├── authService.js
+    │   │   ├── customerService.js
+    │   │   └── matchService.js
+    │   │
+    │   ├── utils/
+    │   │
+    │   ├── App.css
+    │   ├── App.jsx
+    │   ├── index.css
+    │   └── main.jsx
+    │
+    ├── .env
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── README.md
+    └── vite.config.js
 ```
 
 ---
@@ -233,8 +261,8 @@ node scripts/insertData.js
 ### Ya manually Atlas GUI se insert karo
 
 1. MongoDB Atlas → Browse Collections → `tdc` database
-2. `users` collection → Insert Documents → `backend/data/users.json` paste karo
-3. `customers` collection → Insert Documents → `backend/data/customers.json` paste karo
+2. `users` collection → Insert Documents → `users.json` paste karo
+3. `customers` collection → Insert Documents → `seedData1.json` paste karo
 
 > Passwords `users.json` mein already bcrypt hashed hain.
 
