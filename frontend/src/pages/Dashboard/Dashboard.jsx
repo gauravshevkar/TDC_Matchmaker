@@ -162,7 +162,7 @@ export default function Dashboard() {
             ))}
           </div>
         ) : customers.length === 0 ? (
-          <EmptyState search={search} />   {/* ✅ Sahi jagah */}
+          <EmptyState search={search} />  
         ) : (
           <div className="customers-list fade-in">
             {customers.map((c, i) => (
