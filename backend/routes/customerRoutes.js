@@ -14,7 +14,7 @@ router.route('/')
   .get(getCustomers)
   .post(createCustomer);
 
-router.post('/seed', seedDummyProfiles);
+// router.post('/seed', seedDummyProfiles);
 
 router.route('/:id')
   .get(getCustomer)
