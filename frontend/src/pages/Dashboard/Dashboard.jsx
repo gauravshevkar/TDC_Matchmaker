@@ -19,7 +19,6 @@ export default function Dashboard() {
   const [total, setTotal]         = useState(0);
   const [stats, setStats]         = useState({});
   const [loading, setLoading]     = useState(true);
-  // const [seeding, setSeeding]     = useState(false);
   const [search, setSearch]       = useState('');
   const [status, setStatus]       = useState('All');
   const [gender, setGender]       = useState('All');
@@ -30,16 +29,15 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const params = { page, limit: 15 };
-      if (search.trim())       params.search = search.trim();
-      if (status !== 'All')    params.status = status;
-      if (gender !== 'All')    params.gender = gender;
+      if (search.trim())    params.search = search.trim();
+      if (status !== 'All') params.status = status;
+      if (gender !== 'All') params.gender = gender;
 
       const data = await customerService.getAll(params);
       setCustomers(data.customers || []);
       setTotal(data.total || 0);
       setTotalPages(data.totalPages || 1);
 
-      // Compute stats from all
       if (page === 1 && !search && status === 'All' && gender === 'All') {
         const allData = await customerService.getAll({ limit: 1000 });
         const all = allData.customers || [];
@@ -47,8 +45,8 @@ export default function Dashboard() {
         STATUS_TABS.slice(1).forEach(st => {
           s[st] = all.filter(c => c.status === st).length;
         });
-        s.Total = allData.total || 0;
-        s.Male = all.filter(c => c.gender === 'Male').length;
+        s.Total  = allData.total || 0;
+        s.Male   = all.filter(c => c.gender === 'Male').length;
         s.Female = all.filter(c => c.gender === 'Female').length;
         setStats(s);
       }
@@ -59,30 +57,8 @@ export default function Dashboard() {
     }
   }, [page, search, status, gender]);
 
-  useEffect(() => {
-    fetchCustomers();
-  }, [fetchCustomers]);
-
-  // Reset page when filters change
+  useEffect(() => { fetchCustomers(); }, [fetchCustomers]);
   useEffect(() => { setPage(1); }, [search, status, gender]);
-
-  // const handleSeed = async () => {
-  //   setSeeding(true);
-  //   try {
-  //     const data = await customerService.seedProfiles();
-  //     toast.success(`${data.count} profiles loaded into database!`);
-  //     fetchCustomers();
-  //   } catch (err) {
-  //     const msg = err.response?.data?.message || 'Seeding failed';
-  //     if (msg.includes('already')) {
-  //       toast('Profiles already seeded!', { icon: 'ℹ️' });
-  //     } else {
-  //       toast.error(msg);
-  //     }
-  //   } finally {
-  //     setSeeding(false);
-  //   }
-  // };
 
   return (
     <div className="dashboard-page">
@@ -96,13 +72,6 @@ export default function Dashboard() {
             <p className="text-secondary text-sm">Manage your clients and find their perfect match</p>
           </div>
           <div className="dashboard-header-actions">
-            {/* <button className="btn btn-secondary" onClick={handleSeed} disabled={seeding}>
-              {seeding ? <><span className="spinner" /> Loading...</> : (
-                <><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
-                </svg> Load Sample Data</>
-              )}
-            </button> */}
             <button className="btn btn-primary" onClick={() => navigate('/customers/new')}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -115,11 +84,11 @@ export default function Dashboard() {
         {/* Stats */}
         <div className="stats-grid fade-in">
           <StatCard label="Total Clients" value={stats.Total ?? 0} icon="👥" color="rose" />
-          <StatCard label="Active" value={stats.Active ?? 0} icon="✅" color="green" />
-          <StatCard label="Matched" value={stats.Matched ?? 0} icon="💑" color="blue" />
-          <StatCard label="New" value={stats.New ?? 0} icon="🌟" color="purple" />
-          <StatCard label="Male" value={stats.Male ?? 0} icon="♂" color="blue" />
-          <StatCard label="Female" value={stats.Female ?? 0} icon="♀" color="rose" />
+          <StatCard label="Active"        value={stats.Active ?? 0} icon="✅" color="green" />
+          <StatCard label="Matched"       value={stats.Matched ?? 0} icon="💑" color="blue" />
+          <StatCard label="New"           value={stats.New ?? 0} icon="🌟" color="purple" />
+          <StatCard label="Male"          value={stats.Male ?? 0} icon="♂" color="blue" />
+          <StatCard label="Female"        value={stats.Female ?? 0} icon="♀" color="rose" />
         </div>
 
         {/* Filters */}
@@ -193,7 +162,7 @@ export default function Dashboard() {
             ))}
           </div>
         ) : customers.length === 0 ? (
-          
+          <EmptyState search={search} />   {/* ✅ Sahi jagah */}
         ) : (
           <div className="customers-list fade-in">
             {customers.map((c, i) => (
@@ -231,12 +200,14 @@ export default function Dashboard() {
   );
 }
 
+// ── Helper Components ────────────────────────────────────────
+
 function StatCard({ label, value, icon, color }) {
   const colorMap = {
     rose:   { bg: 'var(--rose-gold-glow)', text: 'var(--rose-gold)' },
-    green:  { bg: 'var(--green-bg)',  text: 'var(--green)' },
-    blue:   { bg: 'var(--blue-bg)',   text: 'var(--blue)' },
-    purple: { bg: 'var(--purple-bg)', text: 'var(--purple)' },
+    green:  { bg: 'var(--green-bg)',       text: 'var(--green)'     },
+    blue:   { bg: 'var(--blue-bg)',        text: 'var(--blue)'      },
+    purple: { bg: 'var(--purple-bg)',      text: 'var(--purple)'    },
   };
   const c = colorMap[color] || colorMap.rose;
 
@@ -249,7 +220,6 @@ function StatCard({ label, value, icon, color }) {
   );
 }
 
-<EmptyState search={search} />
 function EmptyState({ search }) {
   return (
     <div className="empty-state card">
