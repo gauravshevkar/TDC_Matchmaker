@@ -12,6 +12,5 @@ router.post('/login', [
 ], login);
 
 router.get('/me', protect, getMe);
-// router.post('/seed', seedUsers); // Only in development
 
 module.exports = router;
