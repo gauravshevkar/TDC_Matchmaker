@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "6a2310167b1d2c2810d371ea"
+  },
+  "username": "matchmaker1",
+  "email": "priya@tdc.com",
+  "password": "$2a$12$t2hFdvS5oBmLivI.7BX/b.hfH2p68PCpZDDVDKNDr0fD0SHx0YvAS",
+  "fullName": "Priya Sharma",
+  "role": "matchmaker",
+  "avatar": "",
+  "isActive": true,
+  "assignedCustomers": [],
+  "createdAt": {
+    "$date": "2026-06-05T18:06:14.324Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-05T18:06:27.278Z"
+  },
+  "__v": 0,
+  "lastLogin": {
+    "$date": "2026-06-05T18:06:27.278Z"
+  }
+}]
